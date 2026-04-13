@@ -1,9 +1,12 @@
-name: test
+name: ML Pipeline
 
-on: push
+on:
+  push:
 
 jobs:
-  test-job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Run completed by: Kalyan - 2022bcs110"
+      - name: Print message
+        run: echo "Run completed by: Kalyan - 2022bcs110"
