@@ -1,12 +1,40 @@
-name: ML Pipeline
+name: ML CI Pipeline
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
-  build:
+  train:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print message
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: pip install pandas scikit-learn
+
+      - name: Run training
+        run: python train.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: model-artifacts
+          path: |
+            model.pkl
+            metrics.json
+
+  report:
+    needs: train
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: model-artifacts
+
+      - name: Print completion
         run: echo "Run completed by  Kalyan - 2022bcs110"
