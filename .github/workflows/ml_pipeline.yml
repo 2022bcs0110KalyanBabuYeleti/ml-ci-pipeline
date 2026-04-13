@@ -28,7 +28,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: model-artifacts
-          path: model.pkl,metrics.json
+          path: |
+            model.pkl
+            metrics.json
 
   report:
     runs-on: ubuntu-latest
@@ -41,4 +43,4 @@ jobs:
           name: model-artifacts
 
       - name: Print message
-        run: echo "Run completed by: YELETI KALYAN BABU - 22bcss110"
+        run: echo "Run completed by: YELETI KALYAN BABU - 22bcs110"
