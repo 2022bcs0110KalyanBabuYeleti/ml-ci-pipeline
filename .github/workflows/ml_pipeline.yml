@@ -43,4 +43,4 @@ jobs:
           name: model-artifacts
 
       - name: Print message
-        run: echo "Run completed by: YELETI KALYAN BABU - 22bcs110"
+        run : echo "Run completed by: YELETI KALYAN BABU - 22bcs110"
