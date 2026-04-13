@@ -1,26 +1,9 @@
-name: ML CI Pipeline
+name: test
 
-on: [push]
+on: push
 
 jobs:
-  train:
+  test-job:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - run: pip install pandas scikit-learn
-      - run: python train.py
-      - uses: actions/upload-artifact@v3
-        with:
-          name: model-artifacts
-          path: model.pkl
-
-  report:
-    runs-on: ubuntu-latest
-    needs: train
-
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: model-artifacts
       - run: echo "Run completed by: Kalyan - 2022bcs110"
