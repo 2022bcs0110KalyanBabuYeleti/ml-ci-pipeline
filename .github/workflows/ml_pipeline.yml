@@ -1,46 +1,39 @@
-name: ML CI Pipeline
+name: ML_CI_Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   train:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt
 
-      - name: Run training
-        run: python train.py
+      - run: python train.py
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: model-artifacts
-          path: |
-            model.pkl
-            metrics.json
+          path: model.pkl
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-artifacts
+          path: metrics.json
 
   report:
     runs-on: ubuntu-latest
     needs: train
-
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: model-artifacts
 
-      - name: Print message
-        run : echo "Run completed by: YELETI KALYAN BABU - 22bcs110"
+      - run: echo Run completed by: YELETI KALYAN BABU - 22bcs110
